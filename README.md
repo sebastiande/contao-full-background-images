@@ -67,7 +67,7 @@ You can choose a specific template for the current page.
 
 Upgrade Notes
 -------------
-* First release for Contao 4.4 **[v3.0.0](https://github.com/sebastiande/contao-full-background-images/releases/tag/v3.0.0)**
+* First release for Contao 4.4 **[3.0.0](https://github.com/sebastiande/contao-full-background-images/releases/tag/3.0.0)**
 
 Compatibility
 -------------
