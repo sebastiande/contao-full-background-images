@@ -3,3 +3,4 @@ composer.lock
 /vendor
 *.iml
 /.phpunit.result.cache
+/.php_cs.cache

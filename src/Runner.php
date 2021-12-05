@@ -275,7 +275,7 @@ class Runner extends \Frontend {
             $templateObject->centerY = $this->centerY ? 'true' : 'false';
 
             // add javascript and css files
-            $GLOBALS['TL_CSS'][] = 'system/modules/full-background-images/assets/css/style.css||static';
+            $GLOBALS['TL_CSS'][] = 'bundles/fullbackgroundimages/css/style.css||static';
             $GLOBALS['TL_BODY'][] = $templateObject->parse();
             $GLOBALS['TL_BODY'][] = '<script type="text/javascript" src="system/modules/full-background-images/assets/js/eventListener.polyfill.js"></script>';
             $GLOBALS['TL_BODY'][] = '<script type="text/javascript" src="system/modules/full-background-images/assets/js/jquery.backstretch.min.js"></script>';
