@@ -1,15 +1,15 @@
 <?php
 
-namespace SDC\Contao\Fbi;
+namespace SDC\Contao\FullBackgroundImages;
 
 use Model\Collection;
-use SDC\Contao\Fbi\Helper\FbiHelper;
-use SDC\Contao\Fbi\Helper\FbiHelperInterface;
+use SDC\Contao\FullBackgroundImages\Helper\Helper;
+use SDC\Contao\FullBackgroundImages\Helper\HelperInterface;
 
-class Runner extends \Frontend
-{
+class Runner extends \Frontend {
+
     /**
-     * @var FbiHelperInterface
+     * @var HelperInterface
      */
     protected $backgroundHelper;
     protected $pageWithBackgrounds;
@@ -18,8 +18,7 @@ class Runner extends \Frontend
     protected $backgroundFiles;
     protected $backgroundOrder;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
 
         $helperClass = $GLOBALS['FBI']['helperClass'];
@@ -27,17 +26,16 @@ class Runner extends \Frontend
         if (class_exists($helperClass)) {
             $this->backgroundHelper = new $helperClass();
         } else {
-            $this->backgroundHelper = new FbiHelper();
+            $this->backgroundHelper = new Helper();
         }
     }
 
-    public function generate(\PageModel $page, \LayoutModel $layout, \PageRegular $pageRegular)
-    {
+    public function generate(\PageModel $page, \LayoutModel $layout, \PageRegular $pageRegular) {
         // skip in backend view
         if (TL_MODE == 'BE') {
             return;
         }
-        
+
         $this->pageWithBackgrounds = $this->backgroundHelper->findAll($page);
 
         // Return if there are no files
@@ -56,25 +54,24 @@ class Runner extends \Frontend
             return;
         }
 
-        $this->fbiTemplate  = $this->pageWithBackgrounds->fbiTemplate;
-        $this->caption      = (int) $this->pageWithBackgrounds->fbiImgCaption;
-        $this->mode         = $this->pageWithBackgrounds->fbiImgMode;
-        $this->sortBy       = $this->pageWithBackgrounds->sortBy;
-        $this->speed        = $this->pageWithBackgrounds->fbiSpeed;
-        $this->timeout      = $this->pageWithBackgrounds->fbiTimeout;
-        $this->order        = $this->pageWithBackgrounds->fbiOrder;
-        $this->fbiLimit     = (int) $this->pageWithBackgrounds->fbiLimit;
-        $this->nav          = (int) $this->pageWithBackgrounds->fbiEnableNav;
-        $this->navClick     = (int) $this->pageWithBackgrounds->fbiNavClick;
-        $this->navPrevNext  = (int) $this->pageWithBackgrounds->fbiNavPrevNext;
-        $this->centerX      = (int) $this->pageWithBackgrounds->fbiCenterX;
-        $this->centerY      = (int) $this->pageWithBackgrounds->fbiCenterY;
+        $this->fbiTemplate = $this->pageWithBackgrounds->fbiTemplate;
+        $this->caption = (int)$this->pageWithBackgrounds->fbiImgCaption;
+        $this->mode = $this->pageWithBackgrounds->fbiImgMode;
+        $this->sortBy = $this->pageWithBackgrounds->sortBy;
+        $this->speed = $this->pageWithBackgrounds->fbiSpeed;
+        $this->timeout = $this->pageWithBackgrounds->fbiTimeout;
+        $this->order = $this->pageWithBackgrounds->fbiOrder;
+        $this->fbiLimit = (int)$this->pageWithBackgrounds->fbiLimit;
+        $this->nav = (int)$this->pageWithBackgrounds->fbiEnableNav;
+        $this->navClick = (int)$this->pageWithBackgrounds->fbiNavClick;
+        $this->navPrevNext = (int)$this->pageWithBackgrounds->fbiNavPrevNext;
+        $this->centerX = (int)$this->pageWithBackgrounds->fbiCenterX;
+        $this->centerY = (int)$this->pageWithBackgrounds->fbiCenterY;
 
         $this->compile($page);
     }
 
-    public function compile(\PageModel $page)
-    {
+    public function compile(\PageModel $page) {
         $images = array();
         $auxDate = array();
 
@@ -82,7 +79,7 @@ class Runner extends \Frontend
 
         while ($backgrounds->next()) {
             // Continue if the files has been processed or does not exist
-            if (isset($images[$backgrounds->path]) || !file_exists(TL_ROOT.'/'.$backgrounds->path)) {
+            if (isset($images[$backgrounds->path]) || !file_exists(TL_ROOT . '/' . $backgrounds->path)) {
                 continue;
             }
 
@@ -111,14 +108,14 @@ class Runner extends \Frontend
 
                 // Add the image
                 $images[$file->path] = [
-                    'id'        => $backgrounds->id,
-                    'uuid'      => $backgrounds->uuid,
-                    'name'      => $file->basename,
+                    'id' => $backgrounds->id,
+                    'uuid' => $backgrounds->uuid,
+                    'name' => $file->basename,
                     'singleSRC' => $file->path,
-                    'alt'       => ($arrMeta['caption'] ?: $arrMeta['title']),
-                    'title'     => $arrMeta['title'],
-                    'imageUrl'  => $arrMeta['link'],
-                    'caption'   => $arrMeta['caption'],
+                    'alt' => ($arrMeta['caption'] ?: $arrMeta['title']),
+                    'title' => $arrMeta['title'],
+                    'imageUrl' => $arrMeta['link'],
+                    'caption' => $arrMeta['caption'],
                 ];
 
                 $auxDate[] = $file->mtime;
@@ -151,14 +148,14 @@ class Runner extends \Frontend
 
                     // Add the image
                     $images[$file->path] = [
-                        'id'        => $subfiles->id,
-                        'uuid'      => $subfiles->uuid,
-                        'name'      => $file->basename,
+                        'id' => $subfiles->id,
+                        'uuid' => $subfiles->uuid,
+                        'name' => $file->basename,
                         'singleSRC' => $file->path,
-                        'alt'       => ($arrMeta['caption'] ?: $arrMeta['title']),
-                        'title'     => $arrMeta['title'],
-                        'imageUrl'  => $arrMeta['link'],
-                        'caption'   => $arrMeta['caption'],
+                        'alt' => ($arrMeta['caption'] ?: $arrMeta['title']),
+                        'title' => $arrMeta['title'],
+                        'imageUrl' => $arrMeta['link'],
+                        'caption' => $arrMeta['caption'],
                     ];
 
                     $auxDate[] = $file->mtime;
@@ -191,7 +188,8 @@ class Runner extends \Frontend
 
                         if (!empty($tmp) && is_array($tmp)) {
                             // Remove all values
-                            $order = array_map(function () {}, array_flip($tmp));
+                            $order = array_map(function () {
+                            }, array_flip($tmp));
 
                             // Move the matching elements to their position in $arrOrder
                             foreach ($images as $k => $v) {
@@ -224,15 +222,15 @@ class Runner extends \Frontend
             $images = array_slice($images, 0, $this->fbiLimit);
         }
 
-        $images         = array_values($images);
-        $maxWidth       = $GLOBALS['TL_CONFIG']['maxImageWidth'];
-        $imageObjects   = [];
-        $imageIndex     = 0;
+        $images = array_values($images);
+        $maxWidth = $GLOBALS['TL_CONFIG']['maxImageWidth'];
+        $imageObjects = [];
+        $imageIndex = 0;
 
         if (count($images)) {
             if ($this->mode === 'random') {
                 mt_srand();
-                $imageIndex = mt_rand(0, count($images)-1);
+                $imageIndex = mt_rand(0, count($images) - 1);
             }
 
             foreach ($images as $image) {
@@ -263,18 +261,18 @@ class Runner extends \Frontend
                     $imgObj->alt = $image->alt;
                     $imgObj->title = $image->title;
                     $imgObj->caption = $image->caption;
-                return json_encode($imgObj);
+                    return json_encode($imgObj);
                 }, $imageObjects)
             );
 
-            $templateObject->timeout        = (int) $this->timeout ? $this->timeout : 12000;
-            $templateObject->speed          = (int) $this->speed ? $this->speed : 1200;
-            $templateObject->caption        = $this->caption ? 'true' : 'false';
-            $templateObject->nav            = $this->nav ? 'true' : 'false';
-            $templateObject->navClick       = $this->navClick ? 'true' : 'false';
-            $templateObject->navPrevNext    = $this->navPrevNext ? 'true' : 'false';
-            $templateObject->centerX        = $this->centerY ? 'true' : 'false';
-            $templateObject->centerY        = $this->centerY ? 'true' : 'false';
+            $templateObject->timeout = (int)$this->timeout ? $this->timeout : 12000;
+            $templateObject->speed = (int)$this->speed ? $this->speed : 1200;
+            $templateObject->caption = $this->caption ? 'true' : 'false';
+            $templateObject->nav = $this->nav ? 'true' : 'false';
+            $templateObject->navClick = $this->navClick ? 'true' : 'false';
+            $templateObject->navPrevNext = $this->navPrevNext ? 'true' : 'false';
+            $templateObject->centerX = $this->centerY ? 'true' : 'false';
+            $templateObject->centerY = $this->centerY ? 'true' : 'false';
 
             // add javascript and css files
             $GLOBALS['TL_CSS'][] = 'system/modules/full-background-images/assets/css/style.css||static';

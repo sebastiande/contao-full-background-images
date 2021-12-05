@@ -2,3 +2,4 @@
 composer.lock
 /vendor
 *.iml
+/.phpunit.result.cache

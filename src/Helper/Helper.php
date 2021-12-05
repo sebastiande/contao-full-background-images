@@ -1,11 +1,10 @@
 <?php
 
-namespace SDC\Contao\Fbi\Helper;
+namespace SDC\Contao\FullBackgroundImages\Helper;
 
-class FbiHelper implements FbiHelperInterface
-{
-    public function findAll(\PageModel $pageModel)
-    {
+class Helper implements HelperInterface {
+
+    public function findAll(\PageModel $pageModel) {
         $pageModel->fbiSRC = deserialize($pageModel->fbiSRC);
 
         switch ($pageModel->fbi) {

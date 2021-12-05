@@ -1,6 +1,6 @@
 <?php
 
-\Controller::loadLanguageFile('tl_content');
+System::loadLanguageFile('tl_content');
 
 $GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'] = array_merge(
     $GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'],
@@ -213,7 +213,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields'] = array_merge(
             'exclude'           => true,
             'inputType'         => 'select',
             'options_callback'  => [
-                'SDC\Contao\Fbi\Helper\Dca\DcaHelper',
+                'SDC\Contao\FullBackgroundImages\Helper\Dca\DcaHelper',
                 'getElementTemplates',
             ],
             'eval'              => [
