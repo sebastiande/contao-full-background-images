@@ -1,0 +1,43 @@
+{
+    "name":"sdc/contao-full-background-images",
+    "version":"1.0.0",
+    "description":"Use full background images in Contao Open Source CMS. This extension also provides a full background image slider/fader.",
+    "keywords":["contao", "full", "background", "slider", "images"],
+    "type":"contao-module",
+    "homepage":"https://sdc-web.net",
+    "license":"MIT",
+    "authors":[
+        {
+            "name":"Sebastian Dernbach",
+            "email":"s.dernbach@sdc-web.net",
+            "homepage":"https://sdc-web.net",
+            "role":"Developer"
+        }
+    ],
+    "support":{
+        "email":"info@sdc-web.net",
+        "issues":"https://github.com/sebastiande/contao-full-background-images/issues",
+        "source":"https://github.com/sebastiande/contao-full-background-images"
+    },
+    "require":{
+        "php":">=7.4",
+        "contao/core-bundle": "^4.4"
+    },
+    "replace": {
+        "oneup/contao-full-background-images": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "SDC\\Contao\\": "src"
+        }
+    },
+    "extra": {
+        "contao": {
+            "sources": {
+                "contao": "system/modules/full-background-images"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
