@@ -15,6 +15,12 @@ $GLOBALS['TL_DCA']['tl_page']['palettes']['root'] = str_replace(
     $GLOBALS['TL_DCA']['tl_page']['palettes']['root']
 );
 
+$GLOBALS['TL_DCA']['tl_page']['palettes']['rootfallback'] = str_replace(
+    'includeChmod;',
+    'includeChmod;{fbi_legend:hide},fbi;',
+    $GLOBALS['TL_DCA']['tl_page']['palettes']['rootfallback']
+);
+
 $GLOBALS['TL_DCA']['tl_page']['palettes']['regular'] = str_replace(
     'includeChmod;',
     'includeChmod;{fbi_legend:hide},fbi;',
