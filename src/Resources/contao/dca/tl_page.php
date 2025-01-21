@@ -1,6 +1,6 @@
 <?php
 
-System::loadLanguageFile('tl_content');
+\Contao\System::loadLanguageFile('tl_content');
 
 $GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'] = array_merge(
     $GLOBALS['TL_DCA']['tl_page']['palettes']['__selector__'],
