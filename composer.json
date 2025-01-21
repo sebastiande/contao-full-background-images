@@ -1,6 +1,6 @@
 {
     "name":"sdc/contao-full-background-images",
-    "version":"3.1.1",
+    "version":"3.1.2",
     "description":"Use full background images in Contao Open Source CMS. This extension also provides a full background image slider/fader.",
     "keywords":["contao", "full", "background", "slider", "images"],
     "type":"contao-bundle",
