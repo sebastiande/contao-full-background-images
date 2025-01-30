@@ -1,3 +1,5 @@
+ARCHIVED - Please switch to https://github.com/1up-lab/contao-full-background-images
+
 Contao Full Background Images
 ==============
 
